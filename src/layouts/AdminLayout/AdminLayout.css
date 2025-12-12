@@ -1,0 +1,238 @@
+/* AdminLayout.css - moved all styles here */
+
+/* variables */
+:root {
+  --sider-width: 220px;
+  --sider-collapsed: 72px;
+  --sider-bg: #051726;
+  --sider-grad: linear-gradient(180deg, #051726, #082434);
+  --accent: #0b67ff;
+  --card-bg: #fff;
+  --surface: #f3f6f9;
+  --muted: #6b7280;
+}
+
+/* top-level wrapper shows collapsed/mobile states */
+.admin-root {
+  min-height: 100vh;
+  --main-margin-left: var(--sider-width);
+}
+
+/* when collapsed */
+.admin-root.is-collapsed {
+  --main-margin-left: var(--sider-collapsed);
+}
+
+/* when mobile (small screens) we remove left margin so header isn't overlapped */
+.admin-root.is-mobile {
+  --main-margin-left: 0;
+}
+
+/* Sider */
+.admin-sider {
+  background: var(--sider-grad);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sider-width) !important;
+  z-index: 60;
+}
+
+/* collapsed width controlled by aria attribute from component */
+.admin-sider[aria-collapsed="true"] {
+  width: var(--sider-collapsed) !important;
+}
+
+/* Sider header */
+.sider-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  box-sizing: border-box;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.brand-icon {
+  font-size: 20px;
+  opacity: 0.95;
+}
+
+.brand-text {
+  font-size: 15px;
+  letter-spacing: 0.2px;
+}
+
+/* toggle button */
+.sider-toggle {
+  background: rgba(255,255,255,0.05);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+}
+.sider-toggle:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+/* Menu area */
+.sider-menu {
+  padding: 12px 8px;
+  overflow: auto;
+  flex: 1;
+}
+
+/* override antd menu styles for modern look */
+.admin-menu .ant-menu-item {
+  border-radius: 10px;
+  margin: 6px 6px;
+  padding: 10px 14px !important;
+  transition: all .18s ease;
+  color: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.admin-menu .ant-menu-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.02);
+}
+.admin-menu .ant-menu-item-selected {
+  background: linear-gradient(90deg, rgba(11,103,255,0.12), rgba(11,103,255,0.06));
+  box-shadow: 0 6px 14px rgba(11,103,255,0.06);
+  border-left: 3px solid var(--accent);
+  padding-left: 12px !important;
+}
+
+/* Sider footer */
+.sider-footer {
+  padding: 14px 12px;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  text-align: center;
+}
+.footer-text {
+  color: rgba(255,255,255,0.6);
+}
+.footer-dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+
+/* main layout (header + content) sits to the right of the sider */
+.main-layout {
+  margin-left: var(--main-margin-left);
+  transition: margin-left .22s ease;
+  min-height: 100vh;
+}
+
+/* Header */
+.admin-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--card-bg);
+  box-shadow: 0 1px 6px rgba(16,24,40,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f1724; /* dark text — visible and not hidden under sidebar */
+}
+
+/* mobile hamburger inside header */
+.mobile-open {
+  display: inline-grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* header right */
+.header-right .user-hello {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Content */
+.admin-content {
+  background: var(--surface);
+  padding: 20px;
+  min-height: calc(100vh - 64px);
+}
+.content-card {
+  background: var(--card-bg);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(16,24,40,0.03);
+  min-height: 70vh;
+}
+
+/* overlay when sider is open on mobile */
+.sider-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 18, 30, 0.4);
+  z-index: 50;
+}
+
+/* responsive specifics */
+@media (max-width: 991px) {
+  /* place sider above and hide by translate when collapsed (aria-collapsed) */
+  .admin-sider {
+    transform: translateX(-100%);
+    transition: transform .22s ease;
+  }
+  .admin-sider[aria-collapsed="false"] {
+    transform: translateX(0);
+  }
+
+  /* when mobile, ensure header isn't shifted by the sider */
+  .main-layout {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,100 @@
+.users-page {
+  padding: 10px 5px;
+}
+
+.users-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.users-error {
+  padding: 12px;
+  background: #ffe5e5;
+  color: #b00000;
+  border-radius: 8px;
+}
+
+.users-loading {
+  padding: 12px;
+  background: #eef3ff;
+  border-radius: 8px;
+}
+
+.users-table-wrapper {
+  overflow-x: auto;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.users-table th,
+.users-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.users-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 14px;
+  color: #444;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.badge.active {
+  background: #4caf50;
+}
+
+.badge.blocked {
+  background: #e53935;
+}
+
+.action-col {
+  text-align: center;
+}
+
+.action-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+  color: #fff;
+}
+
+.action-btn.block {
+  background: #e53935;
+}
+
+.action-btn.block:hover {
+  background: #d32f2f;
+}
+
+.action-btn.unblock {
+  background: #4caf50;
+}
+
+.action-btn.unblock:hover {
+  background: #43a047;
+}
+
+.no-users {
+  text-align: center;
+  padding: 22px;
+  color: #666;
+}

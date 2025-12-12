@@ -1,0 +1,80 @@
+.sold-page {
+  padding: 10px 5px;
+}
+
+.sold-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.sold-error {
+  padding: 12px;
+  background: #ffe5e5;
+  color: #b00000;
+  border-radius: 8px;
+}
+
+.sold-loading {
+  padding: 12px;
+  background: #eef3ff;
+  border-radius: 8px;
+}
+
+.sold-table-wrapper {
+  overflow-x: auto;
+}
+
+.sold-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.sold-table th,
+.sold-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.sold-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 14px;
+  color: #444;
+}
+
+.car-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.car-thumb {
+  width: 70px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.car-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.car-details span {
+  font-size: 12px;
+  color: #777;
+}
+
+.no-sold {
+  text-align: center;
+  padding: 22px;
+  color: #666;
+}
