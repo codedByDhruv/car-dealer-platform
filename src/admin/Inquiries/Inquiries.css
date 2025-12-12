@@ -1,0 +1,102 @@
+.inquiries-page {
+  padding: 10px 5px;
+}
+
+.inquiries-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.inquiries-error {
+  padding: 12px;
+  background: #ffe5e5;
+  color: #b00000;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.inquiries-loading {
+  padding: 12px;
+  background: #eef3ff;
+  border-radius: 8px;
+  color: #333;
+}
+
+.inquiries-table-wrapper {
+  overflow-x: auto;
+}
+
+.inquiries-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.inquiries-table th,
+.inquiries-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.inquiries-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.car-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.car-thumb {
+  width: 70px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.car-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.small-text {
+  font-size: 12px;
+  color: #777;
+}
+
+/* STATUS BADGE */
+.status-badge {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #b58105;
+}
+
+.status-badge.viewed {
+  background: #e3f2fd;
+  color: #0a66c2;
+}
+
+.status-badge.contacted {
+  background: #d4edda;
+  color: #2d7a44;
+}
+
+.no-inquiries {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
