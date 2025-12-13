@@ -78,3 +78,33 @@
   padding: 22px;
   color: #666;
 }
+
+.eye-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #2563eb;
+}
+
+.eye-btn:hover {
+  color: #1d4ed8;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #777;
+}
+
+.sold-modal h3 {
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.id-proof-img {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 8px;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

@@ -3,41 +3,91 @@ import React, { useEffect, useState } from "react";
 import api, { rawBase } from "../../api";
 import "./Cars.css";
 
-import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { FiEdit2, FiTrash2, FiPlus, FiX } from "react-icons/fi";
+import { Modal, message } from "antd";
+import EditCarModal from "./EditCarModal";
+import SoldCarModal from "./SoldCarModal";
+import AddCarModal from "./AddCarModal";
 
 export default function Cars() {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
-  const imgBase = rawBase; // http://localhost:5000
+  const [addOpen, setAddOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [soldOpen, setSoldOpen] = useState(false);
+  const [selectedCar, setSelectedCar] = useState(null);
+
+  const imgBase = rawBase;
+
+  // ==========================
+  // Fetch Cars
+  // ==========================
+  const fetchCars = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get("/cars");
+
+      if (res.data?.success) {
+        setCars(res.data.data.cars);
+        setErr("");
+      } else {
+        setErr("Failed to load cars");
+      }
+    } catch {
+      setErr("Error while loading cars");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        const res = await api.get("/cars");
-
-        if (res.data?.success) {
-          setCars(res.data.data.cars);
-        } else {
-          setErr("Failed to load cars");
-        }
-      } catch (error) {
-        setErr("Error while loading cars");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchCars();
   }, []);
 
-  const handleEdit = (car) => console.log("Edit:", car);
-  const handleDelete = (car) => console.log("Delete:", car);
+  // ==========================
+  // Actions
+  // ==========================
+  const handleDelete = (car) => {
+    Modal.confirm({
+      title: "Delete Car Record",
+      content: "This action is NOT reversible.",
+      okType: "danger",
+      onOk: async () => {
+        try {
+          const res = await api.delete(`/cars/${car._id}`);
+          if (res.data?.success) {
+            message.success("🗑️ Car deleted successfully");
+            fetchCars();
+          }
+        } catch {
+          message.error("❌ Failed to delete car");
+        }
+      },
+    });
+  };
+
+  const handleEdit = (car) => {
+    setSelectedCar(car);
+    setEditOpen(true);
+  };
+
+  const handleSold = (car) => {
+    setSelectedCar(car);
+    setSoldOpen(true);
+  };
 
   return (
     <div className="cars-page">
-      <h1 className="cars-title">Cars</h1>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1 className="cars-title">Cars</h1>
+
+        <button className="action-btn edit" onClick={() => setAddOpen(true)}>
+          <FiPlus /> Add Car
+        </button>
+      </div>
 
       {err && <div className="cars-error">{err}</div>}
       {loading && <div className="cars-loading">Loading cars...</div>}
@@ -60,13 +110,13 @@ export default function Cars() {
                 <tr key={car._id}>
                   <td>
                     <img
-                      src={`${imgBase}${car.images[0]}`}
+                      src={`${imgBase}${car.images?.[0]}`}
                       alt={car.name}
                       className="car-thumb"
-                      onError={(e) => {
-                        e.target.src =
-                          "https://via.placeholder.com/75x55?text=No+Image";
-                      }}
+                      onError={(e) =>
+                        (e.target.src =
+                          "https://via.placeholder.com/75x55?text=No+Image")
+                      }
                     />
                   </td>
 
@@ -80,7 +130,6 @@ export default function Cars() {
                   </td>
 
                   <td>{car.year}</td>
-
                   <td>₹ {car.price.toLocaleString()}</td>
 
                   <td className="actions-col">
@@ -97,15 +146,46 @@ export default function Cars() {
                     >
                       <FiTrash2 />
                     </button>
+                    <button
+                      className="action-btn edit"
+                      onClick={() => handleSold(car)}
+                    >
+                      SOLD
+                    </button>
+
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
-          {cars.length === 0 && <p className="no-cars">No cars found.</p>}
+          {cars.length === 0 && (
+            <p className="no-cars">No cars found.</p>
+          )}
         </div>
       )}
+
+      {/* Modals */}
+      <AddCarModal
+        open={addOpen}
+        onClose={() => setAddOpen(false)}
+        onAdded={fetchCars}
+      />
+
+      <EditCarModal
+        open={editOpen}
+        car={selectedCar}
+        onClose={() => setEditOpen(false)}
+        onUpdated={fetchCars}
+      />
+
+      <SoldCarModal
+        open={soldOpen}
+        car={selectedCar}
+        onClose={() => setSoldOpen(false)}
+        onSold={fetchCars}
+      />
+
     </div>
   );
 }
