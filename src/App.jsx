@@ -6,11 +6,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Admin panel routes FIRST */}
+        <Route path="/admin/*" element={<AdminApp />} />
+
         {/* User website routes */}
         <Route path="/*" element={<UserApp />} />
-
-        {/* Admin panel routes */}
-        <Route path="/admin/*" element={<AdminApp />} />
       </Routes>
     </BrowserRouter>
   );
